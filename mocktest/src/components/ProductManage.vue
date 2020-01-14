@@ -1,13 +1,14 @@
 <template>
   <div>
     产品管理
-    {{content}}
+    <el-button @click="getData">获取数据</el-button>
+
   </div>
 
 </template>
 
 <script>
-  import {getproducts} from '@/api/product'
+    import request from '../http/request'
     export default {
         name: "ProductManage",
         data(){
@@ -15,22 +16,16 @@
                 content:'',
             }
         },
-        created () {
-            this.getProductsApi()
-        },
+
         methods: {
-            getProductsApi () {
-                // 调用API
-                getproducts().then(response => {
-                    console.log(111);
-                    // 这里应该有一步是关于返回的数据是否可被直接渲染的判断
-                    // 赋值给本地变量，然后渲染。
-                    this.content = response.data
-                }).catch(error => {
-                    // 当请求错误时，提示错误信息
-                    this.$message(error)
+            getData(){
+                request.http_mock('http://route.showapi.com/60-27','api_id=63114&api_sign=3847b0').then(res=>{
+                    console.log(res);
                 })
-            }
+
+
+            },
+
         }
 
 
